@@ -1,15 +1,37 @@
-import { OrbitControls } from '@react-three/drei'
+import {
+  useGLTF,
+  OrbitControls,
+  useTexture,
+  Center,
+  Sparkles,
+} from "@react-three/drei";
 
-export default function Experience()
-{
-    return <>
+export default function Experience() {
+  const { nodes } = useGLTF("./model/ifBarbacena.glb");
+  console.log(nodes);
 
-        <OrbitControls makeDefault />
+  const bakedTexture = useTexture("./model/baked.jpg");
+  bakedTexture.flipY = false;
 
-        <mesh scale={ 1.5 }>
-            <boxGeometry />
-            <meshNormalMaterial />
+  return (
+    <>
+      <color args={["#030202"]} attach="background" />
+
+      <OrbitControls makeDefault />
+
+      <Center>
+        <mesh geometry={nodes.if.geometry}>
+          <meshBasicMaterial map={bakedTexture} />
         </mesh>
 
+        <Sparkles
+          size={12}
+          scale={[10, 4, 10]}
+          position-y={0}
+          speed={0.2}
+          count={40}
+        />
+      </Center>
     </>
+  );
 }
