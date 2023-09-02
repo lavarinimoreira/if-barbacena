@@ -1,6 +1,7 @@
 import {
+  PresentationControls,
   useGLTF,
-  OrbitControls,
+  // OrbitControls,
   useTexture,
   Center,
   Sparkles,
@@ -17,13 +18,21 @@ export default function Experience() {
     <>
       <color args={["#030202"]} attach="background" />
 
-      <OrbitControls makeDefault />
+      {/* <OrbitControls makeDefault /> */}
 
       <Center>
-        <mesh geometry={nodes.if.geometry}>
-          <meshBasicMaterial map={bakedTexture} />
-        </mesh>
-
+        <PresentationControls
+          global
+          rotation={[0, 0, 0]}
+          polar={[-0.2, 0.7]} // vertically movment limitation.
+          azimuth={[-1, 0.4]} // horizontal movment limitation.
+          config={{ mass: 2, tension: 80 }}
+          snap={{ mass: 4, tension: 400 }}
+        >
+          <mesh geometry={nodes.if.geometry}>
+            <meshBasicMaterial map={bakedTexture} />
+          </mesh>
+        </PresentationControls>
         <Sparkles
           size={12}
           scale={[10, 4, 10]}
