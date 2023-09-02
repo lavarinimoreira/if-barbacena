@@ -6,15 +6,22 @@ import Experience from "./Experience.jsx";
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
 root.render(
-  <Canvas
-    flat
-    camera={{
-      fov: 45,
-      near: 0.1,
-      far: 200,
-      position: [-4.3, 0.75, 7.5],
-    }}
-  >
-    <Experience />
-  </Canvas>
+  <>
+    <Canvas
+      flat
+      camera={{
+        fov: 45,
+        near: 0.1,
+        far: 200,
+        position: [-4.3, 0.75, 7.5],
+      }}
+    >
+      <Experience />
+    </Canvas>
+    <div className="footer">
+      <a href="https://www.lavarinimoreira.me" target="_blank" rel="noreferrer">
+        lavarinimoreira.me
+      </a>
+    </div>
+  </>
 );
