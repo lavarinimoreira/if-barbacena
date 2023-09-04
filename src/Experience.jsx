@@ -6,13 +6,30 @@ import {
   Center,
   Sparkles,
 } from "@react-three/drei";
+import { useEffect, useState } from "react";
 
 export default function Experience() {
   const { nodes } = useGLTF("./model/ifBarbacena.glb");
-  console.log(nodes);
+  // console.log(nodes);
 
   const bakedTexture = useTexture("./model/baked.jpg");
   bakedTexture.flipY = false;
+
+  // taking the width screen to set up the object scale
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    function handleResize() {
+      setWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+
+    // console.log(width);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [window.innerWidth]);
 
   return (
     <>
@@ -29,7 +46,7 @@ export default function Experience() {
           config={{ mass: 2, tension: 80 }}
           snap={{ mass: 4, tension: 400 }}
         >
-          <mesh geometry={nodes.if.geometry}>
+          <mesh geometry={nodes.if.geometry} scale={width > 1200 ? 1 : 0.5}>
             <meshBasicMaterial map={bakedTexture} />
           </mesh>
         </PresentationControls>
