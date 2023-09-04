@@ -9,7 +9,7 @@ body,
   background: ivory;
 }
 
-canvas {
+.canvas {
   touch-action: none;
 }
 
